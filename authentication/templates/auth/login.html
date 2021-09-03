@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load bulma_tags %}
+
+{% block title %}Login view{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form|bulma }}
+        <div class="field">
+            <button type="submit" class="button is-primary">Login</button>
+        </div>
+    </form>
+    <p>If you don't have account, register <a href="/register">here</a></p>
+
+
+{% endblock %}

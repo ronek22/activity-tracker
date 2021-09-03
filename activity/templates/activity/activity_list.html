@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load bulma_tags %}
+
+{% block title %}Activities{% endblock %}
+
+{% block content %}
+    {% url 'activity:create' as create_url %}
+    <div class="buttons">
+    <a class="button is-success" href="{{ create_url }}" >
+        Add
+    </a>
+    </div>
+    <table class="table is-hoverable is-fullwidth">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Distance</th>
+            <th>Duration</th>
+            <th>Speed</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for activity in object_list %}
+            <tr>
+                <th>{{ activity.pk }}</th>
+                <td>{{ activity.name }}</td>
+                <td>{{ activity.distance }} km</td>
+                <td>{{ activity.duration }}</td>
+                <td>{{ activity.speed }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
