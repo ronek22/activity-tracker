@@ -62,6 +62,9 @@ class Activity(models.Model):
     def get_absolute_url(self):
         return reverse("activity:detail", args=[str(self.id)])
 
+    def __str__(self) -> str:
+        return f"{self.name} | {self.distance} km | {self.duration}"
+
     class Meta:
         db_table = "activities"
         verbose_name_plural = "Activities"

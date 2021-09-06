@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load bulma_tags %}
+
+{% block title %}Update activity{% endblock %}
+
+{% block content %}
+    <form method="post" class="box">
+        {% csrf_token %}
+        <div class="columns">
+            <div class="column is-three-quarters-desktop is-half-tablet">
+                {{ form.name|bulma }}
+            </div>
+                        <div class="column">
+                {{ form.type|bulma }}
+
+            </div>
+            <div class="column">
+                {{ form.effort|bulma }}
+
+            </div>
+        </div>
+        {{ form.description|bulma }}
+        <div class="columns">
+            <div class="column">
+                {{ form.distance|bulma }}
+            </div>
+            <div class="column">
+                {{ form.duration|bulma }}
+            </div>
+
+        </div>
+        <div class="field">
+            <button type="submit" class="button is-fullwidth is-primary">Save</button>
+        </div>
+    </form>
+
+
+{% endblock %}

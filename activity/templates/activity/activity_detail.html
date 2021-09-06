@@ -4,6 +4,47 @@
 {% block title %}Detail of activity{% endblock %}
 
 {% block content %}
-    <p>DETAILS</p>
+    <div class="card">
+        <header class="card-header">
+            <p class="card-header-title">
+                {{ activity.name }}
+            </p>
+        </header>
+        <div class="card-content">
+            <div class="content">
+                <p class="has-text-centered">{{ activity.description }}</p>
+            </div>
+            <div class="level">
+                <div class="level-item hast-text-centered">
+                    <div>
+                        <p class="heading">Distance</p>
+                        <p class="title">{{ activity.distance }}</p>
+                    </div>
+                </div>
+                <div class="level-item hast-text-centered">
+                    <div>
+                        <p class="heading">Duration</p>
+                        <p class="title">{{ activity.duration }}</p>
+                    </div>
+                </div>
+                <div class="level-item hast-text-centered">
+                    <div>
+                        <p class="heading">Speed</p>
+                        <p class="title">{{ activity.speed }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="card-footer">
+            {% url 'activity:update' pk=activity.pk as update_url %}
+            {% url 'activity:delete' pk=activity.pk as delete_url %}
+            <a href="{{ update_url }}" class="card-footer-item is-danger">
+                Edit
+            </a>
+            <a href="{{ delete_url }}" class="card-footer-item">
+                Delete
+            </a>
+        </footer>
+    </div>
 
 {% endblock %}

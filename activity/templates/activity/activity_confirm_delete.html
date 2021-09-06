@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load bulma_tags %}
+
+{% block title %}Remove an activity{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <h2 class="subtitle">Are you sure you want to delete "{{ object }}"</h2>
+        <div class="field">
+            <button type="submit" class="button is-danger">Confirm</button>
+        </div>
+    </form>
+
+{% endblock %}
