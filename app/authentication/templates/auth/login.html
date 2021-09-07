@@ -11,7 +11,8 @@
             <button type="submit" class="button is-primary">Login</button>
         </div>
     </form>
-    <p>If you don't have account, register <a href="/register">here</a></p>
+    {% url 'authentication:register' as register_url %}
+    <p>If you don't have account, register <a href="{{ register_url }}">here</a></p>
 
 
 {% endblock %}
