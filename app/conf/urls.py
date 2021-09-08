@@ -20,6 +20,7 @@ paths = [
     path('admin/', admin.site.urls),
     path('', include("authentication.urls")),
     path('', include("activity.urls")),
+    path('health/', include('health_check.urls'))
 ]
 
 urlpatterns = [
