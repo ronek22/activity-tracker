@@ -40,7 +40,9 @@ INSTALLED_APPS = [
 
     # 3rd party apps
     'bulma',
-    'health_check'
+    'health_check',
+    'health_check.db',  
+    'health_check.storage',
 ]
 
 MIDDLEWARE = [
