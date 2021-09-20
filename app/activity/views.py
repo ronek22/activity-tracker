@@ -1,5 +1,7 @@
 # Create your views here.
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Sum
+from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
@@ -40,3 +42,11 @@ class ActivityUpdateView(LoginRequiredMixin, UpdateView):
 class ActivityDeleteView(LoginRequiredMixin, DeleteView):
     model = Activity
     success_url = reverse_lazy('activity:list')
+
+
+def total_rows(request):
+    total_activities = Activity.objects.all().count()
+    total_distance = Activity.objects.all().aggregate(total_distance=Sum('distance'))
+
+    resp = {"activities": {"count": total_activities, **total_distance}}
+    return JsonResponse(resp, status=200)
