@@ -48,5 +48,5 @@ def total_rows(request):
     total_activities = Activity.objects.all().count()
     total_distance = Activity.objects.all().aggregate(total_distance=Sum('distance'))
 
-    resp = {"activities": {"count": total_activities, **total_distance}}
+    resp = {"activities": {"count": total_activities, **total_distance}, "status": 200}
     return JsonResponse(resp, status=200)
