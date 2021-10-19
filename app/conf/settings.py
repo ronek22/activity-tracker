@@ -10,8 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-from pathlib import Path
 import os
+from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,6 +27,7 @@ DEBUG = int(os.environ.get("DEBUG", default=0))
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", default='*').split(" ")
 
 # Application definition
+APP_VERSION = "1.0.0"
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -41,7 +42,7 @@ INSTALLED_APPS = [
     # 3rd party apps
     'bulma',
     'health_check',
-    'health_check.db',  
+    'health_check.db',
     'health_check.storage',
 ]
 
@@ -68,6 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'conf.context_processors.app_info'
             ],
         },
     },
@@ -80,12 +82,12 @@ WSGI_APPLICATION = 'conf.wsgi.application'
 
 DATABASES = {
     'default': {
-        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
-        "NAME": os.environ.get("SQL_DATABASE", BASE_DIR / "db.sqlite3"),
-        "USER": os.environ.get("SQL_USER", "user"),
+        "ENGINE":   os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
+        "NAME":     os.environ.get("SQL_DATABASE", BASE_DIR / "db.sqlite3"),
+        "USER":     os.environ.get("SQL_USER", "user"),
         "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
-        "HOST": os.environ.get("SQL_HOST", "localhost"),
-        "PORT": os.environ.get("SQL_PORT", "5432")
+        "HOST":     os.environ.get("SQL_HOST", "localhost"),
+        "PORT":     os.environ.get("SQL_PORT", "5432")
     }
 }
 

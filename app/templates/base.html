@@ -9,9 +9,18 @@
         {% font_awesome %}
         <link rel="stylesheet" href="{% static 'bulma/css/style.min.css' %}">
         {% block extra_css %}{% endblock extra_css %}
+        <style>
+            .footer {
+                position: absolute;
+                bottom: 0;
+                padding: 3rem;
+                width: 100%;
+            }
+        </style>
     {% endblock css %}
 </head>
 <body>
+
 
 {% block header %}
     <div class="container">
@@ -38,7 +47,7 @@
                 {% endif %}
 
             </div>
-    </nav>
+        </nav>
     </div>
 {% endblock header %}
 
@@ -68,6 +77,11 @@
 </section>
 
 {% block modal %}{% endblock modal %}
+
+<footer class="footer">
+    <p class="has-text-centered">v {{ APP_VERSION }}</p>
+</footer>
+
 
 
 {% block javascript %}

@@ -19,7 +19,7 @@ from django.urls import include, path
 paths = [
     path('admin/', admin.site.urls),
     path('', include("authentication.urls")),
-    path('', include("activity.urls")),
+    path('', include("activity.urls", namespace="activity")),
     path('health/', include('health_check.urls'))
 ]
 
