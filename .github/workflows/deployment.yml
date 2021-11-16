@@ -19,11 +19,7 @@ jobs:
 #        id: vars
 #        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
-      - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.36.0
-        id: tags
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
       - name: Set up Python 3.9
         uses: actions/setup-python@v2
@@ -40,6 +36,17 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.36.0
+        id: tags
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Echo tag
+        env:
+          IMAGE_TAG: ${{ steps.tags.outputs.new_tag }}
+        run: echo $IMAGE_TAG
 
       - name: Build, tag, and push APP image to Amazon ECR
         id: build-app-image
