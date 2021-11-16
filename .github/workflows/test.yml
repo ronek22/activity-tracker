@@ -1,0 +1,32 @@
+name: Unit Tests
+
+on:
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install Pipenv
+        run: pip install pipenv
+
+      - name: Install Dependencies
+        working-directory: ./app
+        run: pipenv install --dev
+
+      - name: Run tests
+        working-directory: ./app
+        run: pipenv run python manage.py test
