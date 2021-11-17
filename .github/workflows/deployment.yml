@@ -94,14 +94,11 @@ jobs:
           value: ${{ needs.push-to-ecr.outputs.tag }}
 
       - name: Commit App Version json
-        env:
-          REPO_KEY: ${{ secrets.PUSH_TOKEN }}
-          USERNAME: github-actions[bot]
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email "github-actions@github.com"
           git commit -am "Automated app_version update"
-          git push origin main
+          git push
 
 
 
