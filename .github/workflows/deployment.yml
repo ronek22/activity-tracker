@@ -76,6 +76,7 @@ jobs:
           repository: 'ronek22/terraform-aws-ecs-upskill'
           token: ${{ secrets.PUSH_TOKEN }}
 
+
       - name: Test if tag works
         env:
           IMAGE_TAG: ${{ needs.push-to-ecr.outputs.tag }}
@@ -101,6 +102,7 @@ jobs:
           git config --global user.email "github-actions@github.com"
           git commit -am "Automated app_version update"
           git push https://$USERNAME:$REPO_KEY@github.com/ronek22/terraform-aws-ecs-upskill.git
+
 
 
 
