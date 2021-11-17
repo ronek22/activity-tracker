@@ -73,6 +73,11 @@ jobs:
           repository: 'ronek22/terraform-aws-ecs-upskill'
           path: terraform
 
+      - name: Test if tag works
+        env:
+          IMAGE_TAG: ${{ steps.tags.outputs.new_tag }}
+        run: echo $IMAGE_TAG
+
       - name: Check if repo is cloned
         run: |
           cd terraform
