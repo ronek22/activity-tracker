@@ -90,6 +90,18 @@ jobs:
           git commit -am "Automated app_version update"
           git push
 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform init
+        working-directory: ./applications
+        run: terraform init
+
+      - name: Terraform Apply
+        working-directory: ./applications
+        run: terraform apply -auto-approve
+
+
 
 
 
