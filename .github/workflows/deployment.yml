@@ -19,8 +19,6 @@ jobs:
 #        id: vars
 #        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
-
-
       - name: Set up Python 3.9
         uses: actions/setup-python@v2
         with:
@@ -42,11 +40,6 @@ jobs:
         id: tags
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Echo tag
-        env:
-          IMAGE_TAG: ${{ steps.tags.outputs.new_tag }}
-        run: echo $IMAGE_TAG
 
       - name: Build, tag, and push APP image to Amazon ECR
         id: build-app-image
