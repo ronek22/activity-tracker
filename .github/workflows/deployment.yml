@@ -76,16 +76,6 @@ jobs:
           repository: 'ronek22/terraform-aws-ecs-upskill'
           token: ${{ secrets.PUSH_TOKEN }}
 
-
-      - name: Test if tag works
-        env:
-          IMAGE_TAG: ${{ needs.push-to-ecr.outputs.tag }}
-        run: echo $IMAGE_TAG
-
-      - name: Check if repo is cloned
-        run: |
-          ls -la
-
       - name: Update terraform app versions json
         uses: jossef/action-set-json-field@v1
         with:
@@ -95,8 +85,8 @@ jobs:
 
       - name: Commit App Version json
         run: |
-          git config --global user.name 'github-actions'
-          git config --global user.email "github-actions@github.com"
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git commit -am "Automated app_version update"
           git push
 
