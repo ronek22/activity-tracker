@@ -8,8 +8,11 @@ on:
 
 jobs:
   push-to-ecr:
-    name: CD
+    name: Push to ECR
     runs-on: ubuntu-latest
+
+    outputs:
+      tag: ${{ steps.tags.outputs.new_tag }}
 
     steps:
       - name: Checkout Code
@@ -62,7 +65,7 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
   apply-terraform:
-    name: apply-terraform
+    name: Terraform apply
     runs-on: ubuntu-latest
     needs:
       - push-to-ecr
@@ -72,6 +75,11 @@ jobs:
         with:
           repository: 'ronek22/terraform-aws-ecs-upskill'
           path: terraform
+
+      - name: Test if tag works
+        env:
+          IMAGE_TAG: ${{ needs.push-to-ecr.outputs.tag }}
+        run: echo $IMAGE_TAG
 
       - name: Check if repo is cloned
         run: |
