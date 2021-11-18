@@ -71,6 +71,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: LS DIRECTORIES
+        run: ls -la
+
       - name: Build, tag, and push APP image to Amazon ECR
         id: build-app-image
         env:
