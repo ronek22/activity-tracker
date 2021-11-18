@@ -40,9 +40,6 @@ jobs:
             ]
 
   push-to-ecr:
-    defaults:
-      run:
-        working-directory: ecr
 
     name: Push to ECR
     needs: start-runner
@@ -81,7 +78,7 @@ jobs:
           ECR_REPOSITORY: ${{ secrets.ECR_APP_NAME }}
           IMAGE_TAG: ${{ steps.tags.outputs.new_tag }}
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f ./ecr/app/Dockerfile.prod ./app
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f ./app/Dockerfile.prod ./app
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
       - name: Build, tag, and push NGINX image to Amazon ECR
@@ -91,14 +88,11 @@ jobs:
           ECR_REPOSITORY: ${{ secrets.ECR_NGINX_NAME }}
           IMAGE_TAG: ${{ steps.tags.outputs.new_tag }}
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./ecr/nginx
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./nginx
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
 
   apply-terraform:
-    defaults:
-      run:
-        working-directory: terraform
 
     name: Terraform apply
     needs:
@@ -106,11 +100,17 @@ jobs:
       - push-to-ecr
     runs-on: ${{ needs.start-runner.outputs.label }}
     steps:
+      - name: LS BEFORE CHECKOUT
+        run: ls -la
+
       - name: Checkout terraform repository
         uses: actions/checkout@v2
         with:
           repository: 'ronek22/terraform-aws-ecs-upskill'
           token: ${{ secrets.PUSH_TOKEN }}
+
+      - name: LS AFTER CHECKOUT
+        run: ls -la
 
       - name: Update terraform app versions json
         uses: jossef/action-set-json-field@v1
