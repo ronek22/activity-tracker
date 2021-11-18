@@ -33,6 +33,11 @@ jobs:
           subnet-id: ${{ secrets.PRIVATE_SUBNET_ID }}
           security-group-id: ${{ secrets.SECURITY_GROUP_ID }}
 #          iam-role-name: ${{ secrets.IAM_ROLE_NAME }}
+          aws-resource-tags: >
+            [
+              {"Key": "Name", "Value": "ec2-github-runner"},
+              {"Key": "Owner", "Value": "jronkiewicz"}
+            ]
 
   push-to-ecr:
     name: Push to ECR
