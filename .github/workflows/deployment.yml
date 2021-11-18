@@ -40,6 +40,10 @@ jobs:
             ]
 
   push-to-ecr:
+    defaults:
+      run:
+        working-directory: ecr
+
     name: Push to ECR
     needs: start-runner
     runs-on: ${{ needs.start-runner.outputs.label }}
@@ -87,12 +91,12 @@ jobs:
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./nginx
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
-      - name: Clean runner workspace path
-        run: |
-          echo "Cleaning up previous run"
-          rm -rf "${{ github.workspace }}"
 
   apply-terraform:
+    defaults:
+      run:
+        working-directory: terraform
+
     name: Terraform apply
     needs:
       - start-runner
