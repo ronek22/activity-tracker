@@ -32,7 +32,7 @@ jobs:
           ec2-instance-type: t2.micro
           subnet-id: ${{ secrets.PRIVATE_SUBNET_ID }}
           security-group-id: ${{ secrets.SECURITY_GROUP_ID }}
-          iam-role-name: ${{ secrets.IAM_ROLE_NAME }}
+#          iam-role-name: ${{ secrets.IAM_ROLE_NAME }}
 
   push-to-ecr:
     name: Push to ECR
