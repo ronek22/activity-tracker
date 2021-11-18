@@ -60,7 +60,7 @@ jobs:
       - name: Set region
         shell: bash
         run: |
-          - echo "::set-env name=AWS_DEFAULT_REGION={{ secrets.AWS_REGION }}
+          - echo "::set-env name=AWS_DEFAULT_REGION={{ secrets.AWS_REGION }}"
 
       - name: Login to Amazon ECR
         id: login-ecr
