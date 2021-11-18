@@ -57,10 +57,10 @@ jobs:
         with:
           python-version: 3.9
 
-      - name: Set region
-        shell: bash
-        run: |
-          - echo "::set-env name=AWS_DEFAULT_REGION={{ secrets.AWS_REGION }}"
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Login to Amazon ECR
         id: login-ecr
