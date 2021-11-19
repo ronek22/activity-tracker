@@ -27,7 +27,7 @@ DEBUG = int(os.environ.get("DEBUG", default=0))
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", default='*').split(" ")
 
 # Application definition
-APP_VERSION = "1.0.0"
+APP_VERSION = "0.1.0"
 
 INSTALLED_APPS = [
     'django.contrib.admin',
