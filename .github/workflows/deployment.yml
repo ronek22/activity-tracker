@@ -126,6 +126,7 @@ jobs:
           git commit -am "Automated app_version update"
           git push
 
+
 #      - name: Configure AWS Credentials
 #        uses: aws-actions/configure-aws-credentials@v1
 #        with:
