@@ -127,6 +127,11 @@ jobs:
           git push
 
 
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+
 #      - name: Configure AWS Credentials
 #        uses: aws-actions/configure-aws-credentials@v1
 #        with:
